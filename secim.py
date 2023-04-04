@@ -13,14 +13,14 @@ if islem == 1:
     secimislem.Ekle(ad, soyad, numara)
 
 # kayıt sil
-if islem == 2:
+elif islem == 2:
     secimislem.Listele()
     id = int(input("Id seçiniz : "))
     print("Silinecek Kayıt Seçiniz : ")
 
     secimislem.Sil(id)
 # kayıt güncelle
-if islem == 3:
+elif islem == 3:
     secimislem.Listele()
     id = int(input("Id seçiniz : "))
     ad = input("Ad : ")
@@ -28,7 +28,7 @@ if islem == 3:
     numara = int(input("Numara : "))
     secimislem.Guncelle(id, ad, soyad, numara)
 # kayıt listele
-if islem == 4:
+elif islem == 4:
     secimislem.Listele()
 else:
     print("hatalı seçim")
