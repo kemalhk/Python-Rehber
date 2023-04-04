@@ -12,7 +12,7 @@ if islem == 1:
     numara = int(input("Numara : "))
     secimislem.Ekle(ad, soyad, numara)
 
-# kayıt sil
+# kayıt sils
 elif islem == 2:
     secimislem.Listele()
     id = int(input("Id seçiniz : "))
