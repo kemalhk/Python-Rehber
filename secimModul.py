@@ -1,40 +1,48 @@
-from sqlalchemy import create_engine
-
-user = "kemal"
-password = "sifre"
-host = "127.0.0.1"
-port = 3306
-database = "Rehber"
+import sqlite3
 
 
-def get_connection():
-    return create_engine(
-        url="mysql+pymysql://{0}:{1}@{2}:{3}/{4}".format(
-            user, password, host, port, database
-        )
+def Ekle(ad, soyad, numara):
+    conn = sqlite3.connect("rehber.db")
+    c = conn.cursor()
+    c.execute("INSERT INTO rehber VALUES(?,?,?,?)", (None, ad, soyad, numara))
+    conn.commit()
+    conn.close()
+
+    print("kayıt başarıyla eklendi")
+    return
+
+
+def Sil(id):
+    conn = sqlite3.connect("rehber.db")
+    c = conn.cursor()
+    c.execute("DELETE FROM  rehber WHERE id=(?)", id)
+    conn.commit()
+    conn.close()
+
+    print("kayıt başarılı silindi")
+    return
+
+
+def Guncelle(id, ad, soyad, numara):
+    conn = sqlite3.connect("rehber.db")
+    c = conn.cursor()
+    c.execute(
+        "UPDATE rehber Set ad=(?),soyad=(?),numara(?) WHERE id=(?))",
+        (ad, soyad, numara, id),
     )
+    conn.commit()
+    conn.close()
+    print("kayıt başarıyla güncellendi")
+    return
 
 
-if __name__ == "__main__":
-    try:
-        # GET THE CONNECTION OBJECT (ENGINE) FOR THE DATABASE
-        engine = get_connection()
-        print(f"Connection to the {host} for user {user} created successfully.")
-    except Exception as ex:
-        print("Connection could not be made due to the following error: \n", ex)
+def Listele():
+    conn = sqlite3.connect("rehber.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM  rehber")
+    conn.commit()
+    liste = c.fetchall()
+    conn.close()
+    print(liste)
 
-
-def Ekle(Ad, Soyad, Numara):
-    return print("kayıt başarıyla eklendi")
-
-
-def Sil(Ad, Soyad, Numara):
-    return print("kayıt başarılı silindi")
-
-
-def Guncelle(Ad, Soyad, Numara):
-    return print("kayıt başarıyla güncellendi")
-
-
-def Listele(Ad, Soyad, Numara):
     return
